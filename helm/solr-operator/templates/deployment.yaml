@@ -19,6 +19,10 @@ spec:
         control-plane: solr-operator
         controller-tools.k8s.io: "1.0"
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
       {{- if .Values.affinity }}
       affinity:
 {{ toYaml .Values.affinity | indent 8 }}
