@@ -19,6 +19,14 @@ spec:
         control-plane: solr-operator
         controller-tools.k8s.io: "1.0"
     spec:
+      {{- if .Values.affinity }}
+      affinity:
+{{ toYaml .Values.affinity | indent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+      {{- end }}
       serviceAccountName: {{ include "solr-operator.serviceAccountName" . }}
       containers:
       - name: {{ .Chart.Name }}
